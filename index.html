@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Dolphin - Simulação Smart</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0d0d0d">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3586/3586940.png">
+</head>
+<body>
+
+    <div class="main-wrapper">
+        <header class="main-header">
+            <h2>App Dolphin ⚡</h2>
+            <p class="subtitle">Simulador de Recarga</p>
+        </header>
+
+        <div class="theme-bar">
+            <button class="theme-btn active" data-tema="dark">
+                <div class="theme-dot theme-dot-dark"></div> Dark
+            </button>
+            <button class="theme-btn" data-tema="light">
+                <div class="theme-dot theme-dot-light"></div> Light
+            </button>
+            <button class="theme-btn" data-tema="neon">
+                <div class="theme-dot theme-dot-neon"></div> Neon
+            </button>
+        </div>
+
+        <div class="app-container">
+            <section>
+                <label>Veículo</label>
+                <div class="card-grid" id="gridCarros">
+                    <div class="card active" data-cap="38.0"><div class="card-title">Dolphin Mini</div><div class="card-desc">38 kWh</div></div>
+                    <div class="card" data-cap="44.9"><div class="card-title">Dolphin GS</div><div class="card-desc">44.9 kWh</div></div>
+                    <div class="card" data-cap="60.4"><div class="card-title">Dolphin Plus</div><div class="card-desc">60.4 kWh</div></div>
+                </div>
+            </section>
+
+            <section>
+                <label>Carregador</label>
+                <div class="card-grid" id="gridCarregadores">
+                    <div class="card active" data-pot="120" data-efi="87"><div class="card-title">120 kW</div><div class="card-desc">Ultra DC</div></div>
+                    <div class="card" data-pot="60" data-efi="91"><div class="card-title">60 kW</div><div class="card-desc">Rápido DC</div></div>
+                    <div class="card" data-pot="7" data-efi="95"><div class="card-title">7 kW</div><div class="card-desc">Lento AC</div></div>
+                </div>
+            </section>
+
+            <section class="battery-section">
+                <div class="battery-container">
+                    <div class="battery-target" id="barAlvo"></div>
+                    <div class="battery-current" id="barAtual"></div>
+                    <div class="battery-text"><span id="txtBatAtual">20</span>% ➔ <span id="txtBatAlvo">100</span>%</div>
+                </div>
+                <div class="sliders">
+                    <input type="range" id="slideAtual" min="0" max="100" value="20">
+                    <input type="range" id="slideAlvo" min="0" max="100" value="100" style="margin-top:15px">
+                </div>
+            </section>
+
+            <section class="results-panel">
+                <div class="res-row"><span>Energia Cobrada</span><strong id="resCobrada">0.00 kWh</strong></div>
+                <div class="res-row"><span>Tempo Estimado</span><strong id="resTempo">0 min</strong></div>
+                <div class="res-row total"><span>Custo Total</span><span id="resCusto" class="value-highlight">R$ 0,00</span></div>
+                <div id="alertaPromo" class="promo-alert"></div>
+            </section>
+
+            <details class="advanced-settings">
+                <summary>⚙️ Tarifas e Ajustes</summary>
+                <div class="settings-content">
+                    <div class="input-group"><label>Tarifa (R$/kWh)</label><input type="number" id="tarifa" value="1.70" step="0.01" min="0" oninput="validarNegativo(this)"></div>
+                    <div class="input-group"><label>Ativação (R$)</label><input type="number" id="taxa" value="2.00" step="0.01" min="0" oninput="validarNegativo(this)"></div>
+                    <div class="input-group"><label>Voucher (R$)</label><input type="number" id="valorCodigo" value="40.00" step="1.00" min="0" oninput="validarNegativo(this)"></div>
+                </div>
+            </details>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
